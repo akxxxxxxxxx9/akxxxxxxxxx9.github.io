@@ -3,7 +3,7 @@ title: AKI SUOU
 SEOTitle: AKI的博客 | AKI SUOU
 header-img: img/home-bg.jpg
 email: kezmcetg@momobako.x10.bz
-description: "这里是AKI的个人博客，与你一起发现更大的世界 | 要做一个有 swag 的程序员"
+description: "这里是AKI的中国临时个人博客，网络服务支持 | 帮助办理全球地址证明[全网底价]"
 keyword: "AKI, SUOU_AKI, SUOU, 周防, suouaki, @suouaki, AKI的博客, SUOU AKI, 博客, 个人网站, 互联网, Web, JavaScript, React, React Native, 前端, 设计"
 url: "https://akxxxxxxxxx9.github.io/" # your host, for absolute URL
 baseurl: "" # for example, '/blog' if your blog hosted on 'host/blog'
@@ -74,7 +74,7 @@ ga_domain: huangxuan.me
 
 # Sidebar settings
 sidebar: true # whether or not using Sidebar.
-sidebar-about-description: "要做一个有 swag 的程序员 <br> React Team @ Meta"
+sidebar-about-description: "帮助办理全球地址证明[全网底价] <br> React Team @ Meta"
 sidebar-avatar: https://github.com/Huxpro.png # use absolute URL, seeing it's used in both `/` and `/about/`
 
 # Featured Tags
