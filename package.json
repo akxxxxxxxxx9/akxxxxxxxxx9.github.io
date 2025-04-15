@@ -1,25 +1,56 @@
 {
+    // 项目的名称
     "name": "hux-blog",
+
+    // 项目的标题
     "title": "Hux Blog",
+
+    // 项目的作者信息，包括名字和电子邮件地址
     "author": "Hux <huxpro@gmail.com>",
+
+    // 项目的版本号，遵循语义化版本规范 (MAJOR.MINOR.PATCH)
     "version": "1.8.2",
+
+    // 项目的主页链接
     "homepage": "http://huxpro.github.io",
+
+    // 项目的代码仓库信息
     "repository": {
+        // 仓库的类型（这里是 Git）
         "type": "git",
+        // 仓库的 URL 地址
         "url": "https://github.com/Huxpro/huxpro.github.io"
     },
+
+    // 项目的问题反馈地址，通常是 GitHub Issues 页面
     "bugs": "https://github.com/Huxpro/huxpro.github.io/issues",
+
+    // 开发环境依赖的包及其版本
     "devDependencies": {
+        // Grunt 是一个任务运行器，用于自动化任务
         "grunt": ">=1.3.0",
+        // Grunt 插件，用于在文件中添加横幅（如版权声明）
         "grunt-banner": "~0.2.3",
+        // Grunt 插件，用于编译 LESS 文件为 CSS
         "grunt-contrib-less": "^2.0.0",
+        // Grunt 插件，用于压缩 JavaScript 文件
         "grunt-contrib-uglify": "^4.0.1",
+        // Grunt 插件，用于监听文件更改并重新运行任务
         "grunt-contrib-watch": "^1.1.0"
     },
+
+    // 定义项目的脚本命令，可以通过 `npm run <script>` 执行
     "scripts": {
+        // 启动本地开发服务器，运行 Jekyll
         "start": "bundle exec jekyll serve",
+
+        // 监听文件更改并启动开发服务器，适合开发环境使用
         "dev": "grunt watch & npm run start",
+
+        // 推送代码到 boilerplate 分支
         "boil": "git push boilerplate boilerplate:master",
+
+        // 推送代码到 master 分支并推送标签
         "push": "git push origin master --tag"
     }
 }
