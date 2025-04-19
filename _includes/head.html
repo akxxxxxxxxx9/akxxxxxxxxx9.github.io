@@ -1,13 +1,29 @@
+<!--
+  head.html：引入页面全局头部信息和资源
+  1. 基础 Meta：字符集、浏览器兼容、视窗、SEO 描述和关键词、主题色等
+  2. Open Graph：社交平台分享时的标题、类型、描述、图片、URL 等
+  3. 页面 Title、PWA Manifest、Favicon、Canonical URL
+  4. 样式资源：Bootstrap 核心 CSS、自定义主题 CSS、字体图标库
+  5. IE8 HTML5 shim & Respond.js 支持
+  6. Google AdSense 异步广告脚本
+-->
 <head>
+    <!-- 1. 设置页面字符编码为 UTF-8 -->
     <meta charset="utf-8">
+    <!-- 2. 强制 IE 使用最新渲染模式 -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- 3. Google 站点验证（meta verification） -->
     <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <!-- 4. 视口设置，适配移动设备 -->
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <!-- 5. SEO 描述信息 -->
     <meta name="description" content="{{ site.description }}">
+    <!-- 6. 页面关键词，用于 SEO -->
     <meta name="keywords" content="{{ site.keyword }}">
+    <!-- 7. 浏览器主题色 -->
     <meta name="theme-color" content="{{ site.chrome-tab-theme-color }}">
 
-    <!-- Open Graph -->
+    <!-- 8. Open Graph 社交分享元数据 -->
     <meta property="og:title"
         content="{% if page.title %}{{ page.title }} - {{ site.SEOTitle }}{% else %}{{ site.SEOTitle }}{% endif %}">
     {% case page.layout %}
@@ -32,32 +48,24 @@
     <meta property="og:url" content="{{ site.url }}{{ page.url }}">
     <meta property="og:site_name" content="{{ site.SEOTitle }}">
 
+    <!-- 9. 页面标题，用于浏览器标签和搜索结果显示 -->
     <title>{% if page.title %}{{ page.title }} - {{ site.SEOTitle }}{% else %}{{ site.SEOTitle }}{% endif %}</title>
 
-    <!-- Web App Manifest -->
+    <!-- 10. PWA 清单文件 -->
     <link rel="manifest" href="{{ site.baseurl }}/pwa/manifest.json">
-
-    <!-- Favicon -->
+    <!-- 11. Favicon 图标 -->
     <link rel="shortcut icon" href="{{ site.baseurl }}/img/favicon.ico">
-
-    <!-- Canonical URL -->
+    <!-- 12. 规范 URL，避免重复内容 -->
     <link rel="canonical" href="{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}">
 
-    <!-- Bootstrap Core CSS -->
-    <link rel="stylesheet" href="{{ " /css/bootstrap.min.css" | prepend: site.baseurl }}">
+    <!-- 13. 引入 Bootstrap 核心 CSS -->
+    <link rel="stylesheet" href="{{ "/css/bootstrap.min.css" | prepend: site.baseurl }}">
+    <!-- 14. 引入自定义主题 CSS -->
+    <link rel="stylesheet" href="{{ "/css/hux-blog.min.css" | prepend: site.baseurl }}">
+    <!-- 15. 引入 Font Awesome 图标库 -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="{{ " /css/hux-blog.min.css" | prepend: site.baseurl }}">
-
-    <!-- Custom Fonts -->
-    <!-- <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
-    <!-- Hux change font-awesome CDN to qiniu -->
-    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet"
-        type="text/css">
-
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!-- 16. IE8 支持 HTML5 元素和媒体查询 -->
     <!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
@@ -66,7 +74,6 @@
     <!-- ga & ba script hoook -->
     <script></script>
 
-    <!-- Google AdSense -->
-    <script data-ad-client="ca-pub-6487568398225121" async
-        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <!-- 17. Google AdSense 异步广告脚本 -->
+    <script data-ad-client="ca-pub-6487568398225121" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 </head>

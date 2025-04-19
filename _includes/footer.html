@@ -1,11 +1,21 @@
+<!--
+  footer.html：页面底部模板
+  1. 包含 SNS 链接（使用 include sns-links.html）
+  2. 渲染版权信息、GitHub Star 按钮
+  3. 引入 jQuery、Bootstrap、自定义主题及搜索脚本
+  4. 可选 Service Worker 注册脚本
+  5. 定义异步加载函数 async
+-->
+
 <!-- Footer -->
 <footer>
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                <!-- SNS Link -->
+                <!-- 1. 在底部渲染社交媒体链接 -->
                 {% include sns-links.html center=true %}
 
+                <!-- 2. 渲染版权信息与 GitHub Star 按钮 -->
                 <p class="copyright text-muted">
                     Copyright &copy; {{ site.title }} {{ site.time | date: '%Y' }}
                     <br>
@@ -20,26 +30,25 @@
     </div>
 </footer>
 
-<!-- jQuery -->
+<!-- 3. 引入 jQuery：提供基础 DOM 操作 -->
 <script src="{{ "/js/jquery.min.js " | prepend: site.baseurl }}"></script>
 
-<!-- Bootstrap Core JavaScript -->
-<!-- Currently, only navbar scroll-down effect at desktop still depends on this -->
+<!-- 4. 引入 Bootstrap JS：支持导航栏滚动等效果 -->
 <script src="{{ "/js/bootstrap.min.js " | prepend: site.baseurl }}"></script>
 
-<!-- Custom Theme JavaScript -->
+<!-- 5. 引入自定义主题 JS：页面交互和特效 -->
 <script src="{{ "/js/hux-blog.min.js " | prepend: site.baseurl }}"></script>
 
-<!-- Simple Jekyll Search -->
+<!-- 6. 引入简单 Jekyll 搜索脚本：提供页面内搜索功能 -->
 <script src="{{ "/js/simple-jekyll-search.min.js" | prepend: site.baseurl }}"></script>
 
-<!-- Service Worker -->
+<!-- 7. 可选 Service Worker 脚本注册：当 site.service-worker=true 时加载 -->
 {% if site.service-worker %}
 <script src="{{ "/js/snackbar.js " | prepend: site.baseurl }}"></script>
 <script src="{{ "/js/sw-registration.js " | prepend: site.baseurl }}"></script>
 {% endif %}
 
-<!-- async load function -->
+<!-- 8. 定义异步加载函数 async -->
 <script>
     function async(u, c) {
         var d = document, t = 'script',
@@ -106,7 +115,7 @@
 <script src='{{ "/js/archive.js " | prepend: site.baseurl }}'></script>
 {% endif %}
 
-<!--fastClick.js -->
+<!-- 9. fastClick.js：提供快速点击事件 -->
 <script>
     async("//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js", function () {
         var $nav = document.querySelector("nav");
@@ -115,7 +124,7 @@
 </script>
 
 
-<!-- Google Analytics -->
+<!-- 10. Google Analytics -->
 {% if site.ga_track_id %}
 <script>
     // dynamic User by Hux
@@ -136,7 +145,7 @@
 {% endif %}
 
 
-<!-- Baidu Tongji -->
+<!-- 11. Baidu Tongji -->
 {% if site.ba_track_id %}
 <script>
     // dynamic User by Hux
@@ -154,7 +163,7 @@
 {% endif %}
 
 
-<!-- Side Catalog -->
+<!-- 12. Side Catalog -->
 {% unless page.no-catalog %}
 <script type="text/javascript">
     function generateCatalog(selector) {
@@ -216,7 +225,7 @@
 {% endunless %}
 
 
-<!-- Multi-Lingual -->
+<!-- 13. Multi-Lingual -->
 {% if page.multilingual %}
 <!-- Handle Language Change -->
 <script type="text/javascript">
@@ -226,15 +235,12 @@
     var $select = document.querySelector("select");
 
     // Changes at v1.8.1: include lang flag as a url query. This interop well with catalog hash anchors.
-    function getLang() { return new URLSearchParams(document.location.search).get("lang") }
-
+    function getLang() { return new URLSearchParams(document.location.search).get("lang") } // 获取 URL 中的 lang 参数
     function setLang(newLang) {
         var params = new URLSearchParams(document.location.search)
         params.set("lang", newLang)
         document.location.search = params.toString()  // refresh.
-    }
-
-    // handle render
+    } // 根据传入的新语言更新 URL 查询并刷新页面
     function _render() {
         var lang = getLang()
         // en
@@ -254,24 +260,22 @@
         }
         // interop with catalog 
         generateCatalog(".catalog-body");
-    }
+    } // 渲染中英文内容及目录，基于当前 lang 值切换显示
+    function onLanChange(index) {
+        setLang(index == 1 ? "en" : "zh")
+    } // 根据选择框索引切换语言并刷新页面
+
+    // handle render
+    _render();
 
     // handle select change
-    function onLanChange(index) {
-        if (index == 0) {
-            lang = "zh"
-        } else {
-            lang = "en"
-        }
-        setLang(lang)
+    $select.onchange = function () {
+        onLanChange(this.selectedIndex)
     }
-
-    // init
-    _render();
 </script>
 {% endif %}
 
-<!-- Simple Jekyll Search -->
+<!-- 14. Simple Jekyll Search -->
 <script>
     // https://stackoverflow.com/questions/1912501/unescape-html-entities-in-javascript
     function htmlDecode(input) {

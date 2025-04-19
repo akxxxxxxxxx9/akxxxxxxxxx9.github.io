@@ -1,9 +1,16 @@
+<!--
+  friends.html：友情链接列表
+  1. 判断 site.friends 配置是否存在，决定输出
+  2. 渲染水平分割线和 'FRIENDS' 标题
+  3. 循环 site.friends 数组，生成链接列表
+-->
 {% if site.friends %}
-<hr>
-<h5>FRIENDS</h5>
-<ul class="list-inline">
+<!-- 1. 全局开启时渲染‘好友链接’模块 -->
+<hr> <!-- 2. 水平分隔线 -->
+<h5>FRIENDS</h5> <!-- 3. 区块标题 -->
+<ul class="list-inline"> <!-- 4. 水平列表容器 -->
   {% for friend in site.friends %}
-  <li><a href="{{friend.href}}">{{friend.title}}</a></li>
+  <li><!-- 4.1 遍历每个友情链接项 --><a href="{{ friend.href }}">{{ friend.title }}</a></li>
   {% endfor %}
 </ul>
 {% endif %}

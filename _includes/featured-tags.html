@@ -1,13 +1,26 @@
 {% comment %}
+  featured-tags.html: 精选标签模块
+  1. 判断全局 site.featured-tags 是否开启，决定整体输出
+  2. include.bottom 控制是否渲染分割线 <hr>
+  3. 渲染标题并链接到归档页 (/archive/)
+  4. 收集 site.tags 中出现次数 > featured-condition-size 的标签
+  5. 使用 __SEPARATOR__ 分隔、排序后渲染最终标签链接
+{% endcomment %}
+
+{% comment %}
     @param {boolean} bottom - bottom will render <hr> 
 {% endcomment %}
 
 {% if site.featured-tags %}
+<!-- 1. 判断全局是否启用精选标签 -->
 <section>
     {% if include.bottom %}
+    <!-- 1.1. include.bottom=true 时渲染响应式隐藏在小屏/手机上的分隔线 -->
         <hr class="hidden-sm hidden-xs">
     {% endif %}
+    <!-- 2. 标题：链接到标签归档页 -->
     <h5><a href="{{'/archive/' | prepend: site.baseurl }}">FEATURED TAGS</a></h5>
+    <!-- 3. 标签列表容器 -->
     <div class="tags">
         {% capture tags %}
         {% comment %}
@@ -15,13 +28,17 @@
             url_encode/decode is for escaping otherwise extra <a> will get generated 
             but it will break sort...
         {% endcomment %}
-        {% for tag in site.tags %}{% if tag[1].size > site.featured-condition-size %}
-                <a data-sort="{{ site.posts.size | minus: tag[1].size | prepend: '0000' | slice: -4, 4 }}" 
+        {% for tag in site.tags %}
+            {% if tag[1].size > site.featured-condition-size %}
+            <!-- 3.1. 筛选出现次数大于阈值的标签 -->
+                <a data-sort="{{ site.posts.size | minus: tag[1].size | prepend: '0000' | slice: -4, 4 }}"
                     href="{{ site.baseurl }}/archive/?tag={{ tag[0] | url_encode }}"
                     title="{{ tag[0] }}"
                     rel="{{ tag[1].size }}">{{ tag[0] }}</a>__SEPARATOR__
-        {% endif %}{% endfor %}
+            {% endif %}
+        {% endfor %}
         {% endcapture %}
+        <!-- 4. 分割、排序并渲染最终标签链接 -->
         {{ tags | split:'__SEPARATOR__' | sort }}
     </div>
 </section>
