@@ -1,110 +1,58 @@
 {% comment %}
     @param {Boolean} center 
 {% endcomment %}
-<!-- 注释：定义一个参数 center，类型为布尔值，用于控制列表是否居中显示 -->
 
 {% if include.center %}
-<!-- 如果调用模板时传递了 center=true，则生成居中的无序列表 -->
 <ul class="list-inline text-center">
 {% else %}
-<!-- 否则生成普通的无序列表（不居中） -->
 <ul class="list-inline">
 {% endif %}
 
   {% if site.RSS %}
-  <!-- 如果站点配置中定义了 RSS 订阅 -->
   <li>
-    <!-- RSS 链接，指向站点的 feed.xml 文件 -->
     <a href="{{ "/feed.xml" | prepend: site.baseurl }}">
-      <!-- 使用 Font Awesome 的堆叠图标样式 -->
       <span class="fa-stack fa-lg">
-        <!-- 背景圆形图标 -->
         <i class="fa fa-circle fa-stack-2x"></i>
-        <!-- RSS 图标，覆盖在圆形上，颜色反转 -->
         <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
       </span>
     </a>
   </li>
   {% endif %}
-
   {% if site.twitter_username %}
-  <!-- 如果站点配置中定义了 Twitter 用户名 -->
   <li>
-    <!-- Twitter 个人主页链接 -->
     <a href="https://twitter.com/{{ site.twitter_username }}">
       <span class="fa-stack fa-lg">
         <i class="fa fa-circle fa-stack-2x"></i>
-        <!-- Twitter 图标 -->
-        <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+        <i class="fa fa-twitter fa-stack-1x fa-inverse">X</i>
       </span>
     </a>
   </li>
   {% endif %}
-
-  {% if site.zhihu_username %}
-  <!-- 如果站点配置中定义了知乎用户名 -->
-  <li>
-    <!-- 知乎个人主页链接，打开新窗口 -->
-    <a target="_blank" href="https://www.zhihu.com/people/{{ site.zhihu_username }}">
-      <span class="fa-stack fa-lg">
-        <i class="fa fa-circle fa-stack-2x"></i>
-        <!-- 知乎图标（使用文字“知”代替 Font Awesome 图标） -->
-        <i class="fa fa-stack-1x fa-inverse">知</i>
-      </span>
-    </a>
-  </li>
-  {% endif %}
-
-  {% if site.weibo_username %}
-  <!-- 如果站点配置中定义了微博用户名 -->
-  <li>
-    <!-- 微博个人主页链接，打开新窗口 -->
-    <a target="_blank" href="http://weibo.com/{{ site.weibo_username }}">
-      <span class="fa-stack fa-lg">
-        <i class="fa fa-circle fa-stack-2x"></i>
-        <!-- 微博图标 -->
-        <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
-      </span>
-    </a>
-  </li>
-  {% endif %}
-
   {% if site.facebook_username %}
-  <!-- 如果站点配置中定义了 Facebook 用户名 -->
   <li>
-    <!-- Facebook 个人主页链接，打开新窗口 -->
     <a target="_blank" href="https://www.facebook.com/{{ site.facebook_username }}">
       <span class="fa-stack fa-lg">
         <i class="fa fa-circle fa-stack-2x"></i>
-        <!-- Facebook 图标 -->
         <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
       </span>
     </a>
   </li>
   {% endif %}
-
   {% if site.github_username %}
-  <!-- 如果站点配置中定义了 GitHub 用户名 -->
   <li>
-    <!-- GitHub 个人主页链接，打开新窗口 -->
     <a target="_blank" href="https://github.com/{{ site.github_username }}">
       <span class="fa-stack fa-lg">
-        <i class="fa fa-circle fa-stack-2x"></i>
-        <!-- GitHub 图标 -->
+        <i class="fa fa-circle fa-stack-2x">G</i>
         <i class="fa fa-github fa-stack-1x fa-inverse"></i>
       </span>
     </a>
   </li>
   {% endif %}
-
   {% if site.linkedin_username %}
-  <!-- 如果站点配置中定义了 LinkedIn 用户名 -->
   <li>
-    <!-- LinkedIn 个人主页链接，打开新窗口 -->
     <a target="_blank" href="https://www.linkedin.com/in/{{ site.linkedin_username }}">
       <span class="fa-stack fa-lg">
         <i class="fa fa-circle fa-stack-2x"></i>
-        <!-- LinkedIn 图标 -->
         <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
       </span>
     </a>
