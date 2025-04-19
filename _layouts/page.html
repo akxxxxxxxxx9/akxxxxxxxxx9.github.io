@@ -8,19 +8,19 @@ layout: default
 <!-- 引入 intro-header.html 模板，类型为 page（可能是标题或特色图片区域） -->
 
 <!-- 主要内容区域 -->
-<div class="container-fluid">
+<div class="container">
   <div class="row">
     {% if site.sidebar == false %}
     <!-- 如果站点配置中禁用侧边栏 -->
     <!-- 无侧边栏布局 -->
     <!-- 文章列表容器 -->
-    <div class="col-12
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1
       postlist-container">
       <!-- 渲染页面内容（由 Markdown 文件提供） -->
       {{ content }}
     </div>
     <!-- 侧边栏容器（仍显示，但内容可能较少） -->
-    <div class="col-12
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1
       sidebar-container">
       <!-- 引入特色标签模板 -->
       {% include featured-tags.html %}
