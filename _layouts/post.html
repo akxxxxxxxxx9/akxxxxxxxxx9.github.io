@@ -19,6 +19,7 @@ layout: default
             <!-- 文章容器，使用 Bootstrap 栅格布局 -->
             <div class="
                 col-lg-8 col-lg-offset-1 col-md-8 col-md-offset-1 col-sm-12 col-xs-12 post-container">
+
                 
                 <!-- 多语言支持 -->
                 {% if page.multilingual %}
@@ -78,7 +79,8 @@ layout: default
                 <!-- 网易云跟帖评论框结束 -->
                 {% endif %}
             </div>  
-
+        </div>
+        <div class="row">
             <!-- 侧边目录容器 -->
             {% unless page.no-catalog %}
             <!-- 如果页面未禁用目录（page.no-catalog 不为真） -->
