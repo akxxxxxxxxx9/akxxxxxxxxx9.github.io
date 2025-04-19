@@ -50,6 +50,9 @@
 }
 .catalog-container {
   padding: 0px;
+  float: right;
+  margin-right: 2vw;
+  max-width: 220px;
 }
 .side-catalog {
   display: block;
