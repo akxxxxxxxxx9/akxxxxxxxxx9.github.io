@@ -13,12 +13,10 @@ layout: default
 
 <!-- 文章内容区域 -->
 <article>
-    <div class="container">
+    <div class="container-fluid">
         <div class="row">
             <!-- 文章容器，使用 Bootstrap 栅格布局 -->
-            <div class="post-container
-                col-lg-8 col-lg-offset-2
-                col-md-10 col-md-offset-1 ">
+            <div class="post-container col-12 ">
                 <!-- 渲染文章的具体内容（由 Markdown 文件提供） -->
                 {{ content }}
 
@@ -67,9 +65,7 @@ layout: default
             </div>
 
             <!-- 侧边栏容器，使用 Bootstrap 栅格布局 -->
-            <div class="sidebar-container
-                col-lg-8 col-lg-offset-2
-                col-md-10 col-md-offset-1 ">
+            <div class="sidebar-container col-12 ">
                 <!-- 引入特色标签模板 -->
                 {% include featured-tags.html %}
                 <!-- 引入友链模板 -->
