@@ -60,6 +60,16 @@
   height: 100%;
   padding-bottom: 40px;
   width: 195px;
+  position: sticky;
+  top: 80px;
+  /* 兼容旧样式 */
+}
+
+@media (min-width: 1200px) {
+  .side-catalog.fixed {
+    position: fixed;
+    top: 80px;
+  }
 }
 .side-catalog.fixed {
   position: fixed;
