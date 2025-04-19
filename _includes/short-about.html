@@ -1,14 +1,20 @@
+<!-- 关于我部分，仅在中等（md）和大型（lg）屏幕上可见 -->
 <section class="visible-md visible-lg">
+  <!-- 分隔线，用于视觉分隔 -->
   <hr>
+  <!-- 标题：关于我，链接到关于页面 -->
   <h5><a href="{{'/about/' | prepend: site.baseurl }}">ABOUT ME</a></h5>
+  <!-- 简短的个人介绍区域 -->
   <div class="short-about">
+    <!-- 如果站点配置中定义了侧边栏头像，则显示头像 -->
     {% if site.sidebar-avatar %}
     <img src="{{site.sidebar-avatar}}" />
     {% endif %}
+    <!-- 如果站点配置中定义了侧边栏简介，则显示简介文本 -->
     {% if site.sidebar-about-description %}
     <p>{{site.sidebar-about-description}}</p>
     {% endif %}
-    <!-- SNS Link -->
+    <!-- 社交媒体链接，包含外部模板文件 -->
     {% include sns-links.html %}
   </div>
 </section>

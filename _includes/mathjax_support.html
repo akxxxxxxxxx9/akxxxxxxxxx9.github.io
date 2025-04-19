@@ -1,20 +1,33 @@
+<!-- 配置 MathJax 的脚本，类型为 text/x-mathjax-config -->
 <script type="text/x-mathjax-config">
+  // 调用 MathJax.Hub.Config 方法来设置 MathJax 的全局配置
   MathJax.Hub.Config({
+    // TeX 模块的配置，用于处理 LaTeX 公式
     TeX: {
+      // 公式编号的设置
       equationNumbers: {
+        // 自动为公式添加编号，格式遵循 AMS（American Mathematical Society）标准
         autoNumber: "AMS"
       }
     },
+    // SVG 模块的配置，用于渲染公式为 SVG 格式
     SVG: {
+      // 设置公式渲染的缩放比例为 90%
       scale: 90
     },
+    // tex2jax 预处理器配置，用于识别和处理页面中的 LaTeX 代码
     tex2jax: {
+      // 定义行内数学公式的分隔符为 $...$
       inlineMath: [ ['$','$'] ],
+      // 定义块级（显示）数学公式的分隔符为 $$...$$
       displayMath: [ ['$$','$$'] ],
+      // 允许处理转义字符，例如 \$ 会显示为 $ 而不是触发公式解析
       processEscapes: true,
     }
   });
 </script>
+
+<!-- 引入 MathJax 主脚本，用于在页面中渲染数学公式 -->
 <script type="text/javascript"
         src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_SVG">
 </script>

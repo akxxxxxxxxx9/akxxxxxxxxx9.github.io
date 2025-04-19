@@ -1,16 +1,26 @@
-<!-- Search -->
+<!-- 搜索页面 -->
 <div class="search-page">
+  <!-- 关闭搜索页面的图标容器 -->
   <div class="search-icon-close-container">
+    <!-- 关闭按钮，点击后隐藏搜索页面 -->
     <span class="search-icon-close">
+      <!-- 使用 Font Awesome 的向下箭头图标，表示关闭 -->
       <i class="fa fa-chevron-down"></i>
     </span>
   </div>
+  <!-- 搜索主内容区域，使用 Bootstrap 的 container 类 -->
   <div class="search-main container">
+    <!-- 使用 Bootstrap 的栅格系统布局 -->
     <div class="row">
+      <!-- 搜索框和结果区域，居中显示，适配不同屏幕尺寸 -->
       <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <!-- 搜索表单（空的 form 标签，可能用于 JavaScript 动态处理） -->
         <form></form>
+        <!-- 搜索输入框 -->
         <input type="text" id="search-input" placeholder="$ grep...">
+        <!-- 结束表单标签（与开始标签配对，实际可能由 JavaScript 填充） -->
         </form>
+        <!-- 搜索结果显示区域 -->
         <div id="search-results" class="mini-post-list"></div>
       </div>
     </div>

@@ -1,37 +1,107 @@
-<!-- Navigation -->
-{% if page.nav-style == "invert" or page.header-style == "text" %}
-<nav class="navbar navbar-default navbar-custom navbar-fixed-top invert">
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <!-- 设置页面字符编码为 UTF-8 -->
+    <meta charset="UTF-8">
+    <!-- 设置页面标题 -->
+    <title>带导航和数学公式的网页</title>
+    <!-- 引入 Bootstrap CSS，用于导航栏样式 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- 引入 Font Awesome CSS，用于搜索图标 -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <!-- 自定义 CSS 样式（假设存在） -->
+    <style>
+        /* 自定义导航栏样式 */
+        .navbar-custom { background-color: #333; }
+        .navbar-custom .navbar-brand { color: #fff; }
+        .navbar-custom .navbar-nav > li > a { color: #fff; }
+        .invert { background-color: #fff; color: #333; }
+        .invert .navbar-brand, .invert .navbar-nav > li > a { color: #333; }
+        /* 语言选择器样式 */
+        .sel-lang { padding: 5px; margin: 10px; }
+    </style>
+</head>
+<body>
+    <!-- 配置 MathJax 的脚本，类型为 text/x-mathjax-config -->
+    <script type="text/x-mathjax-config">
+      // 调用 MathJax.Hub.Config 方法来设置 MathJax 的全局配置
+      MathJax.Hub.Config({
+        // TeX 模块的配置，用于处理 LaTeX 公式
+        TeX: {
+          // 公式编号的设置
+          equationNumbers: {
+            // 自动为公式添加编号，格式遵循 AMS 标准
+            autoNumber: "AMS"
+          }
+        },
+        // SVG 模块的配置，用于渲染公式为 SVG 格式
+        SVG: {
+          // 设置公式渲染的缩放比例为 90%
+          scale: 90
+        },
+        // tex2jax 预处理器配置，用于识别和处理页面中的 LaTeX 代码
+        tex2jax: {
+          // 定义行内数学公式的分隔符为 $...$
+          inlineMath: [ ['$','$'] ],
+          // 定义块级（显示）数学公式的分隔符为 $$...$$
+          displayMath: [ ['$$','$$'] ],
+          // 允许处理转义字符，例如 \$ 会显示为 $ 而不是触发公式解析
+          processEscapes: true,
+        }
+      });
+    </script>
+    <!-- 引入 MathJax 主脚本，用于在页面中渲染数学公式 -->
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_SVG">
+    </script>
+
+    <!-- 导航栏 -->
+    {% if page.nav-style == "invert" or page.header-style == "text" %}
+    <!-- 如果页面配置中 nav-style 为 "invert" 或 header-style 为 "text"，则应用 invert 样式 -->
+    <nav class="navbar navbar-default navbar-custom navbar-fixed-top invert">
     {% else %}
+    <!-- 否则使用默认样式 -->
     <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
-        {% endif %}
+    {% endif %}
         <div class="container-fluid">
-            <!-- Brand and toggle get grouped for better mobile display -->
+            <!-- 品牌 logo 和移动端折叠按钮分组，优化移动端显示 -->
             <div class="navbar-header page-scroll">
+                <!-- 移动端导航栏折叠按钮 -->
                 <button type="button" class="navbar-toggle">
+                    <!-- 屏幕阅读器专用，描述按钮功能 -->
                     <span class="sr-only">Toggle navigation</span>
+                    <!-- 折叠按钮的“三条横线”图标 -->
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
+                <!-- 品牌 logo，点击返回首页 -->
                 <a class="navbar-brand" href="{{ site.baseurl }}/">{{ site.title }}</a>
             </div>
 
-            <!-- Collect the nav links, forms, and other content for toggling -->
+            <!-- 导航链接、表单等内容的折叠区域 -->
             <div id="huxblog_navbar">
                 <div class="navbar-collapse">
+                    <!-- 导航链接列表，靠右对齐 -->
                     <ul class="nav navbar-nav navbar-right">
+                        <!-- 首页链接 -->
                         <li>
                             <a href="{{ site.baseurl }}/">Home</a>
                         </li>
                         {% for page in site.pages %}
+                        <!-- 如果页面有标题且未设置隐藏导航（hide-in-nav != true） -->
                         {% if page.title and page.hide-in-nav != true %}
                         <li>
+                            <!-- 生成页面链接，包含页面标题 -->
                             <a href="{{ page.url | prepend: site.baseurl }}">{{ page.title }}</a>
                         </li>
                         {% endif %}
                         {% endfor %}
+                        <!-- 搜索图标 -->
                         <li class="search-icon">
+                            <!-- 搜索按钮，点击触发 JavaScript 函数 -->
                             <a href="javascript:void(0)">
+                                <!-- 使用 Font Awesome 的搜索图标 -->
                                 <i class="fa fa-search"></i>
                             </a>
                         </li>
@@ -43,55 +113,92 @@
         <!-- /.container -->
     </nav>
 
+    <!-- 语言选择器，用于切换页面语言 -->
+    <select class="sel-lang" onchange="onLanChange(this.options[this.options.selectedIndex].value)">
+        <!-- 下拉菜单选项，默认选中中文 -->
+        <option value="0" selected> 中文 | Chinese </option>
+        <!-- 下拉菜单选项，选择英文 -->
+        <option value="1"> 英文 | English </option>
+    </select>
+
+    <!-- 页面主要内容区域 -->
+    <div class="container">
+        <!-- 示例数学公式 -->
+        <p>这是一个行内公式：$E=mc^2$</p>
+        <p>这是一个块级公式：</p>
+        $$ \int_a^b f(x) \, dx = F(b) - F(a) $$
+    </div>
+
+    <!-- 自定义导航栏脚本，替换 Bootstrap 低性能导航栏 -->
     <script>
-        // Drop Bootstarp low-performance Navbar
-        // Use customize navbar with high-quality material design animation
-        // in high-perf jank-free CSS3 implementation
+        // 使用高质量的 Material Design 动画，基于高效、无卡顿的 CSS3 实现
+        // 获取 body 元素
         var $body = document.body;
+        // 获取折叠按钮元素
         var $toggle = document.querySelector('.navbar-toggle');
+        // 获取导航栏容器元素
         var $navbar = document.querySelector('#huxblog_navbar');
+        // 获取折叠内容区域元素
         var $collapse = document.querySelector('.navbar-collapse');
 
+        // 定义导航栏操作对象 __HuxNav__
         var __HuxNav__ = {
+            // 关闭导航栏
             close: function () {
+                // 清空导航栏的类名，移除展开状态
                 $navbar.className = " ";
-                // wait until animation end.
+                // 等待动画完成（400ms 后）
                 setTimeout(function () {
-                    // prevent frequently toggle
+                    // 防止频繁切换，确保导航栏未展开
                     if ($navbar.className.indexOf('in') < 0) {
-                        $collapse.style.height = "0px"
+                        // 将折叠区域高度设为 0，隐藏内容
+                        $collapse.style.height = "0px";
                     }
-                }, 400)
+                }, 400);
             },
+            // 打开导航栏
             open: function () {
-                $collapse.style.height = "auto"
+                // 设置折叠区域高度为 auto，显示内容
+                $collapse.style.height = "auto";
+                // 为导航栏添加 in 类，触发展开动画
                 $navbar.className += " in";
             }
-        }
+        };
 
-        // Bind Event
+        // 为折叠按钮绑定点击事件
         $toggle.addEventListener('click', function (e) {
+            // 如果导航栏已展开（包含 in 类）
             if ($navbar.className.indexOf('in') > 0) {
-                __HuxNav__.close()
+                // 关闭导航栏
+                __HuxNav__.close();
             } else {
-                __HuxNav__.open()
+                // 打开导航栏
+                __HuxNav__.open();
             }
-        })
+        });
 
-        /**
-         * Since Fastclick is used to delegate 'touchstart' globally
-         * to hack 300ms delay in iOS by performing a fake 'click',
-         * Using 'e.stopPropagation' to stop 'touchstart' event from 
-         * $toggle/$collapse will break global delegation.
-         * 
-         * Instead, we use a 'e.target' filter to prevent handler
-         * added to document close HuxNav.  
-         *
-         * Also, we use 'click' instead of 'touchstart' as compromise
-         */
+        // 解决 FastClick 在 iOS 上全局代理 touchstart 事件的问题
+        // FastClick 会模拟 click 事件以消除 300ms 延迟
+        // 使用 e.target 过滤，防止 document 的点击事件关闭导航栏
         document.addEventListener('click', function (e) {
+            // 如果点击的是折叠按钮或其子元素（icon-bar），不执行关闭
             if (e.target == $toggle) return;
             if (e.target.className == 'icon-bar') return;
+            // 否则关闭导航栏
             __HuxNav__.close();
-        })
+        });
+
+        // 语言切换函数（示例实现）
+        function onLanChange(lang) {
+            // 根据选择的语言值（0: 中文, 1: 英文）执行切换逻辑
+            if (lang == "0") {
+                alert("已切换到中文");
+                // 这里可以添加实际的语言切换逻辑，例如修改页面内容
+            } else if (lang == "1") {
+                alert("Switched to English");
+                // 这里可以添加实际的语言切换逻辑
+            }
+        }
     </script>
+</body>
+</html>

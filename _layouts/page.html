@@ -1,50 +1,51 @@
 ---
 layout: default
 ---
+<!-- 页面 front matter，指定使用 default 布局 -->
 
-<!-- Page Header -->
+<!-- 页面头部 -->
 {% include intro-header.html type='page' %}
+<!-- 引入 intro-header.html 模板，类型为 page（可能是标题或特色图片区域） -->
 
-<!-- Main Content -->
+<!-- 主要内容区域 -->
 <div class="container">
   <div class="row">
     {% if site.sidebar == false %}
-    <!-- NO SIDEBAR -->
-    <!-- PostList Container -->
+    <!-- 如果站点配置中禁用侧边栏 -->
+    <!-- 无侧边栏布局 -->
+    <!-- 文章列表容器 -->
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1
       postlist-container">
+      <!-- 渲染页面内容（由 Markdown 文件提供） -->
       {{ content }}
     </div>
-    <!-- Sidebar Container -->
+    <!-- 侧边栏容器（仍显示，但内容可能较少） -->
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1
       sidebar-container">
-      <!-- Featured Tags -->
+      <!-- 引入特色标签模板 -->
       {% include featured-tags.html %}
-
-      <!-- Friends Blog -->
+      <!-- 引入友链模板 -->
       {% include friends.html %}
     </div>
     {% else %}
-
-    <!-- USE SIDEBAR -->
-    <!-- PostList Container -->
+    <!-- 如果站点配置中启用侧边栏 -->
+    <!-- 使用侧边栏布局 -->
+    <!-- 文章列表容器 -->
     <div class="col-lg-8 col-lg-offset-1 col-md-8 col-md-offset-1 col-sm-12
       col-xs-12 postlist-container">
+      <!-- 渲染页面内容 -->
       {{ content }}
     </div>
-    <!-- Sidebar Container -->
+    <!-- 侧边栏容器 -->
     <div class="col-lg-3 col-lg-offset-0 col-md-3 col-md-offset-0 col-sm-12
       col-xs-12 sidebar-container">
-      <!-- Featured Tags -->
+      <!-- 引入特色标签模板 -->
       {% include featured-tags.html %}
-
-      <!-- Short About -->
+      <!-- 引入简短介绍模板 -->
       {% include short-about.html %}
-
-      <!-- Friends Blog -->
+      <!-- 引入友链模板 -->
       {% include friends.html %}
-
-      <!-- Ads -->
+      <!-- 引入广告模板 -->
       {% include ads.html %}
     </div>
     {% endif %}
@@ -52,23 +53,32 @@ layout: default
 </div>
 
 {% if site.page-mathjax %}
-<!-- Add support for Mathjax by Voleking-->
-<!-- If you want to see formulars well in post preview, Maybe you should add this.-->
-<!-- However, most of the time formulars may not appear in the post preview, you can delete it.-->
+<!-- 如果站点配置中启用 MathJax 支持 -->
+<!-- MathJax 配置（由 Voleking 添加） -->
 <script type="text/x-mathjax-config">
+  // 配置 MathJax 参数
   MathJax.Hub.Config({
+    // TeX 模块配置
     TeX: {
+      // 公式编号设置
       equationNumbers: {
+        // 使用 AMS 格式自动编号
         autoNumber: "AMS"
       }
     },
+    // tex2jax 预处理器配置
     tex2jax: {
+      // 行内数学公式分隔符为 $...$
       inlineMath: [ ['$','$'] ],
+      // 块级数学公式分隔符为 $$...$$
       displayMath: [ ['$$','$$'] ],
+      // 允许处理转义字符（如 \$ 显示为 $）
       processEscapes: true,
     }
   });
 </script>
+<!-- 引入 MathJax 主脚本 -->
 <script type="text/javascript"
-  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
 {% endif %}

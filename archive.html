@@ -4,84 +4,134 @@ layout: default
 description: "「我干了什么 究竟拿了时间换了什么」"
 header-img: "img/bg-little-universe.jpg"
 ---
+<!-- 页面 front matter -->
+<!-- title: 页面标题为“Archive” -->
+<!-- layout: 使用 default 布局（定义在 _layouts/default.html 中） -->
+<!-- description: 页面描述，可能是页面摘要或引言 -->
+<!-- header-img: 页面头部背景图片，路径为 img/bg-little-universe.jpg -->
 
 <!--
 Credits: this page shamelessly borrowed a lot from:
 https://github.com/kitian616/jekyll-TeXt-theme
 -->
-<!-- Page Header -->
+<!-- 注释：说明页面设计参考了 jekyll-TeXt-theme 项目 -->
+
+<!-- 页面头部 -->
 {% include intro-header.html type='page' short=true %}
+<!-- 引入 intro-header.html 模板，类型为 page，short=true 表示使用简短样式（可能是更小的标题或图片） -->
 
-<!-- Main Content -->
+<!-- 主要内容区域 -->
 <div class="container">
-	<div class="row">
-		<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-			<!-- Tags (as filter) -->
-			<div id='tag_cloud' class="tags tags-sup js-tags">
-				<a class="tag-button--all" data-encode="">
-					Show All
-					<sup>{{site.posts.size}}</sup>
-				</a>
+    <div class="row">
+        <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <!-- 内容容器，使用 Bootstrap 栅格布局，桌面端占 8 列，中等屏幕占 10 列，居中显示 -->
 
-				{% capture tags %}
-				{% for tag in site.tags %}
-				<a data-sort="{{ site.posts.size | minus: tag[1].size | prepend: '0000' | slice: -4, 4 }}"
-					data-encode="{{ tag[0] | strip | url_encode }}" class="tag-button" title="{{ tag[0] }}"
-					rel="{{ tag[1].size }}">
-					{{ tag[0] }}
-					<sup>{{tag[1].size}}</sup>
-				</a>__SEPERATOR__
-				{% endfor %}
-				{% endcapture %}
-				{{ tags | split:'__SEPERATOR__' | sort }}
-			</div>
+            <!-- 标签过滤器 -->
+            <div id='tag_cloud' class="tags tags-sup js-tags">
+                <!-- 标签云容器，id='tag_cloud' 用于 JavaScript 操作 -->
+                <!-- tags-sup 和 js-tags 可能是自定义类，控制样式或行为 -->
+                <a class="tag-button--all" data-encode="">
+                    <!-- “显示全部”按钮，点击显示所有文章 -->
+                    Show All
+                    <sup>{{site.posts.size}}</sup>
+                    <!-- 显示站点文章总数 -->
+                </a>
 
-			<!-- Article List -->
-			<div class="mini-post-list js-result d-none">
-				{%- assign _sorted_list = site.posts -%}
-				{%- assign _sorted_list = _sorted_list | sort: 'date' -%}
-				{%- assign _sorted_list = _sorted_list | reverse -%}
+                {% capture tags %}
+                <!-- 使用 capture 捕获所有标签的 HTML 片段 -->
+                {% for tag in site.tags %}
+                <!-- 遍历站点中的所有标签 -->
+                <a data-sort="{{ site.posts.size | minus: tag[1].size | prepend: '0000' | slice: -4, 4 }}"
+                    data-encode="{{ tag[0] | strip | url_encode }}" 
+                    class="tag-button" 
+                    title="{{ tag[0] }}"
+                    rel="{{ tag[1].size }}">
+                    <!-- 标签按钮 -->
+                    <!-- data-sort: 用于排序，计算非该标签文章数（总数 - 标签文章数），补零后取后四位 -->
+                    <!-- data-encode: 标签名称的 URL 编码，用于 JavaScript 过滤 -->
+                    <!-- title: 鼠标悬停时显示标签名称 -->
+                    <!-- rel: 标签关联的文章数量 -->
+                    {{ tag[0] }}
+                    <sup>{{tag[1].size}}</sup>
+                    <!-- 显示标签名称和文章数量 -->
+                </a>__SEPERATOR__
+                <!-- 使用分隔符分隔每个标签 -->
+                {% endfor %}
+                {% endcapture %}
+                {{ tags | split:'__SEPERATOR__' | sort }}
+                <!-- 将捕获的标签 HTML 按分隔符分割并排序，渲染到页面 -->
+            </div>
 
+            <!-- 文章列表 -->
+            <div class="mini-post-list js-result d-none">
+                <!-- 文章列表容器，js-result 用于 JavaScript 操作，d-none 表示默认隐藏（可能由 JS 控制显示） -->
+                {%- assign _sorted_list = site.posts -%}
+                <!-- 将站点所有文章赋值给 _sorted_list -->
+                {%- assign _sorted_list = _sorted_list | sort: 'date' -%}
+                <!-- 按文章日期排序 -->
+                {%- assign _sorted_list = _sorted_list | reverse -%}
+                <!-- 反转排序（最新文章在最前） -->
 
-				{%- for _article in _sorted_list -%}
-				{%- assign _tags = '' -%}
-				{%- for _tag in _article.tags -%}
-				{%- assign _tag_encode = _tag | strip | url_encode -%}
-				{%- if forloop.last -%}
-				{%- assign _tags = _tags | append: _tag_encode -%}
-				{%- else -%}
-				{%- assign _tags = _tags | append: _tag_encode | append: ',' -%}
-				{%- endif -%}
-				{%- endfor -%}
+                {%- for _article in _sorted_list -%}
+                <!-- 遍历排序后的文章列表 -->
+                {%- assign _tags = '' -%}
+                <!-- 初始化文章标签字符串 -->
+                {%- for _tag in _article.tags -%}
+                <!-- 遍历文章的每个标签 -->
+                {%- assign _tag_encode = _tag | strip | url_encode -%}
+                <!-- 对标签名称进行 URL 编码 -->
+                {%- if forloop.last -%}
+                {%- assign _tags = _tags | append: _tag_encode -%}
+                <!-- 如果是最后一个标签，直接追加编码后的标签 -->
+                {%- else -%}
+                {%- assign _tags = _tags | append: _tag_encode | append: ',' -%}
+                <!-- 否则追加编码后的标签并加逗号分隔 -->
+                {%- endif -%}
+                {%- endfor -%}
 
-				{% comment %} group by year {% endcomment %}
-				{%- assign _currentdate = _article.date | date: '%Y' -%}
-				{%- if _currentdate != _date -%}
-				{%- unless forloop.first -%}</section>{%- endunless -%}
-				<section>
-					<span class="fa listing-seperator">
-						<span class="tag-text">{{ _currentdate }}</span>
-					</span>
-					{%- assign _date = _currentdate -%}
-					{%- endif -%}
+                {% comment %} group by year {% endcomment %}
+                <!-- 按年份分组 -->
+                {%- assign _currentdate = _article.date | date: '%Y' -%}
+                <!-- 获取文章年份 -->
+                {%- if _currentdate != _date -%}
+                <!-- 如果当前文章年份与上一次不同 -->
+                {%- unless forloop.first -%}</section>{%- endunless -%}
+                <!-- 如果不是第一篇文章，关闭上一个年份的 section -->
+                <section>
+                    <!-- 开始新的年份 section -->
+                    <span class="fa listing-seperator">
+                        <!-- 年份分隔符，使用 Font Awesome 图标（具体图标未指定，可能需 CSS 定义） -->
+                        <span class="tag-text">{{ _currentdate }}</span>
+                        <!-- 显示年份 -->
+                    </span>
+                    {%- assign _date = _currentdate -%}
+                    <!-- 更新 _date 为当前年份 -->
+                {%- endif -%}
 
-					<div class="post-preview item" data-tags="{{ _tags }}">
-						<a href="{{ _article.url | prepend: site.baseurl }}">
-							<h2 class="post-title">
-								{{ _article.title }}
-							</h2>
-							{% if _article.subtitle %}
-							<h3 class="post-subtitle">
-								{{ _article.subtitle }}
-							</h3>
-							{% endif %}
-						</a>
-						<hr>
-					</div>
-					{%- if forloop.last -%}
-				</section>{%- endif -%}
-				{% endfor %}
-			</div>
-		</div>
-	</div>
+                <div class="post-preview item" data-tags="{{ _tags }}">
+                    <!-- 文章预览项，data-tags 存储文章的编码标签列表 -->
+                    <a href="{{ _article.url | prepend: site.baseurl }}">
+                        <!-- 链接到文章页面，添加站点基础路径 -->
+                        <h2 class="post-title">
+                            {{ _article.title }}
+                            <!-- 显示文章标题 -->
+                        </h2>
+                        {% if _article.subtitle %}
+                        <h3 class="post-subtitle">
+                            {{ _article.subtitle }}
+                            <!-- 如果文章有副标题，显示副标题 -->
+                        </h3>
+                        {% endif %}
+                    </a>
+                    <hr>
+                    <!-- 分隔线，视觉分隔文章预览 -->
+                </div>
+                {%- if forloop.last -%}
+                </section>
+                <!-- 如果是最后一篇文章，关闭年份 section -->
+                {%- endif -%}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
 </div>

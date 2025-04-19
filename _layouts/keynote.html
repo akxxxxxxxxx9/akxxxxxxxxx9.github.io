@@ -1,149 +1,168 @@
 ---
 layout: default
 ---
+<!-- 页面 front matter，指定使用 default 布局 -->
 
-<!-- Image to hack wechat -->
+<!-- 微信分享图片 hack（已注释，暂时禁用） -->
 <!-- <img src="/img/icon_wechat.png" width="0" height="0"> -->
+<!-- 动态选择页面或站点的头部图片（已注释） -->
 <!-- <img src="{{ site.baseurl }}/{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}" width="0" height="0"> -->
 
-<!-- Post Header -->
+<!-- 引入页面头部模板，类型为 keynote -->
 {% include intro-header.html type='keynote' %}
 
-
-<!-- Post Content -->
+<!-- 文章内容区域 -->
 <article>
     <div class="container">
         <div class="row">
-
-            <!-- Post Container -->
+            <!-- 文章容器，使用 Bootstrap 栅格布局 -->
             <div class="post-container
                 col-lg-8 col-lg-offset-2
                 col-md-10 col-md-offset-1 ">
+                <!-- 渲染文章的具体内容（由 Markdown 文件提供） -->
+                {{ content }}
 
-				{{ content }}
-
+                <!-- 隐藏的分隔线，用于视觉间距 -->
                 <hr style="visibility: hidden;">
+                <!-- 文章导航：上一页和下一页 -->
                 <ul class="pager">
                     {% if page.previous.url %}
+                    <!-- 如果存在上一篇文章 -->
                     <li class="previous">
-                        <a href="{{ page.previous.url | prepend: site.baseurl | replace: '//', '/' }}" data-toggle="tooltip" data-placement="top" title="{{page.previous.title}}">
-                        Previous<br>
-                        <span>{{page.previous.title}}</span>
+                        <!-- 链接到上一篇文章，显示标题并添加 tooltip -->
+                        <a href="{{ page.previous.url | prepend: site.baseurl | replace: '//', '/' }}" 
+                           data-toggle="tooltip" 
+                           data-placement="top" 
+                           title="{{page.previous.title}}">
+                            Previous<br>
+                            <span>{{page.previous.title}}</span>
                         </a>
                     </li>
                     {% endif %}
                     {% if page.next.url %}
+                    <!-- 如果存在下一篇文章 -->
                     <li class="next">
-                        <a href="{{ page.next.url | prepend: site.baseurl | replace: '//', '/' }}" data-toggle="tooltip" data-placement="top" title="{{page.next.title}}">
-                        Next<br>
-                        <span>{{page.next.title}}</span>
+                        <!-- 链接到下一篇文章，显示标题并添加 tooltip -->
+                        <a href="{{ page.next.url | prepend: site.baseurl | replace: '//', '/' }}" 
+                           data-toggle="tooltip" 
+                           data-placement="top" 
+                           title="{{page.next.title}}">
+                            Next<br>
+                            <span>{{page.next.title}}</span>
                         </a>
                     </li>
                     {% endif %}
                 </ul>
+                <!-- 隐藏的分隔线，用于视觉间距 -->
                 <hr style="visibility: hidden;">
 
                 {% if site.disqus_username %}
-                <!-- disqus 评论框 start -->
+                <!-- Disqus 评论框 -->
                 <div class="comment">
-                    <div id="disqus_thread" class="disqus-thread">
-
-                    </div>
+                    <!-- Disqus 评论区域，动态加载评论内容 -->
+                    <div id="disqus_thread" class="disqus-thread"></div>
                 </div>
-                <!-- disqus 评论框 end -->
+                <!-- Disqus 评论框结束 -->
                 {% endif %}
-
             </div>
 
-            <!-- Sidebar Container -->
+            <!-- 侧边栏容器，使用 Bootstrap 栅格布局 -->
             <div class="sidebar-container
                 col-lg-8 col-lg-offset-2
                 col-md-10 col-md-offset-1 ">
-
-                <!-- Featured Tags -->
+                <!-- 引入特色标签模板 -->
                 {% include featured-tags.html %}
-
-                <!-- Friends Blog -->
+                <!-- 引入友链模板 -->
                 {% include friends.html %}
-
             </div>
         </div>
     </div>
 </article>
 
-<!-- resize header to fullscreen keynotes -->
+<!-- JavaScript：调整头部区域高度以适配全屏 keynote 效果 -->
 <script>
+    // 获取页面中的 <header> 元素
     var $header = document.getElementsByTagName("header")[0];
+    // 定义调整高度的函数
     function resize(){
         /*
-         * leave 85px to both
-         * - told/imply users that there has more content below
-         * - let user can scroll in mobile device, seeing the keynote-view is unscrollable
+         * 保留底部 85px 空间：
+         * - 提示用户下方有更多内容
+         * - 在移动设备上允许滚动，因为 keynote 视图不可滚动
          */
-        $header.style.height = (window.innerHeight-85) + 'px';
+        $header.style.height = (window.innerHeight - 85) + 'px';
     }
+    // 页面 DOM 加载完成时调整高度
     document.addEventListener('DOMContentLoaded', function(){
         resize();
-    })
+    });
+    // 页面完全加载时调整高度
     window.addEventListener('load', function(){
         resize();
-    })
+    });
+    // 窗口大小改变时调整高度
     window.addEventListener('resize', function(){
         resize();
-    })
+    });
+    // 立即执行一次调整
     resize();
 </script>
 
-
 {% if site.disqus_username %}
-<!-- disqus 公共JS代码 start (一个网页只需插入一次) -->
+<!-- Disqus 公共 JavaScript 代码（一个页面只需加载一次） -->
 <script type="text/javascript">
-    /* * * CONFIGURATION VARIABLES * * */
-    var disqus_shortname = "{{site.disqus_username}}";
-    var disqus_identifier = "{{page.id}}";
-    var disqus_url = "{{site.url}}{{page.url}}";
+    /* Disqus 配置变量 */
+    var disqus_shortname = "{{site.disqus_username}}"; // Disqus 用户名
+    var disqus_identifier = "{{page.id}}"; // 页面唯一标识符
+    var disqus_url = "{{site.url}}{{page.url}}"; // 页面完整 URL
 
+    // 动态加载 Disqus 评论脚本
     (function() {
-        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        var dsq = document.createElement('script'); 
+        dsq.type = 'text/javascript'; 
+        dsq.async = true; // 异步加载
+        dsq.src = '//' + disqus_shortname + '.disqus.comembed.js';
+        // 将脚本插入到 <head> 或 <body> 中
         (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
     })();
 </script>
-<!-- disqus 公共JS代码 end -->
+<!-- Disqus 公共 JavaScript 代码结束 -->
 {% endif %}
 
-
 {% if site.anchorjs %}
-<!-- async load function -->
+<!-- 异步加载脚本的通用函数 -->
 <script>
     function async(u, c) {
       var d = document, t = 'script',
           o = d.createElement(t),
           s = d.getElementsByTagName(t)[0];
-      o.src = u;
-      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
-      s.parentNode.insertBefore(o, s);
+      o.src = u; // 设置脚本 URL
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); } // 加载完成回调
+      s.parentNode.insertBefore(o, s); // 插入脚本
     }
 </script>
-<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<!-- AnchorJS 脚本，文档：http://bryanbraun.github.io/anchorjs/ -->
 <script>
-    async("//cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js",function(){
+    async("//cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js", function(){
+        // 配置 AnchorJS 选项
         anchors.options = {
-          visible: 'always',
-          placement: 'right',
-          icon: '#'
+          visible: 'always', // 锚点始终可见
+          placement: 'right', // 锚点显示在右侧
+          icon: '#' // 锚点图标为 #
         };
+        // 为页面中的标题添加锚点，排除特定元素
         anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
-    })
+    });
 </script>
+<!-- AnchorJS 样式调整 -->
 <style>
-    /* place left on bigger screen */
+    /* 在大屏幕上将锚点放置在左侧 */
     @media all and (min-width: 800px) {
-        .anchorjs-link{
+        .anchorjs-link {
             position: absolute;
             left: -0.75em;
             font-size: 1.1em;
-            margin-top : -0.1em;
+            margin-top: -0.1em;
         }
     }
 </style>
