@@ -50,9 +50,16 @@
 }
 .catalog-container {
   padding: 0px;
-  float: right;
-  margin-right: 2vw;
   max-width: 220px;
+}
+@media (min-width: 1200px) {
+  .catalog-container {
+    position: fixed;
+    right: 0;
+    top: 80px;
+    z-index: 1000;
+    margin: 0;
+  }
 }
 .side-catalog {
   display: block;
