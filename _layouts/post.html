@@ -18,7 +18,7 @@ layout: default
         <div class="row">
             <!-- 文章容器，使用 Bootstrap 栅格布局 -->
             <div class="
-                col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 post-container">
+                col-lg-8 col-lg-offset-1 col-md-8 col-md-offset-1 col-sm-12 col-xs-12 post-container">
                 
                 <!-- 多语言支持 -->
                 {% if page.multilingual %}
@@ -83,7 +83,7 @@ layout: default
             {% unless page.no-catalog %}
             <!-- 如果页面未禁用目录（page.no-catalog 不为真） -->
             <div class="
-                col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 catalog-container">
+                col-lg-3 col-lg-offset-1 col-md-3 col-md-offset-1 col-sm-12 col-xs-12 catalog-container">
                 <div class="side-catalog">
                     <!-- 隐藏的分隔线，仅在大型屏幕上显示 -->
                     <hr class="hidden-sm hidden-xs">
@@ -99,7 +99,7 @@ layout: default
 
             <!-- 侧边栏容器 -->
             <div class="
-                col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 sidebar-container">
+                col-lg-3 col-lg-offset-1 col-md-3 col-md-offset-1 col-sm-12 col-xs-12 sidebar-container">
                 <!-- 特色标签，显示在底部 -->
                 {% include featured-tags.html bottom=true %}
                 <!-- 友链 -->
