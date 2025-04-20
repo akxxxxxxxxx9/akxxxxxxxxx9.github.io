@@ -1,4 +1,7 @@
 @media (min-width: 1200px) {
+  .post-container {
+    margin-right: 300px; /* 预留足够宽度，避免正文与目录重叠 */
+  }
   .post-container,
   .sidebar-container {
     padding-right: 5%;
@@ -57,6 +60,9 @@
   border-radius: 8px;
 }
 @media (min-width: 1200px) {
+  .post-container {
+    margin-right: 300px; /* 预留足够宽度，避免正文与目录重叠 */
+  }
   .catalog-container {
     position: fixed;
     right: 40px; /* 让目录整体离页面右侧有留白 */
@@ -77,6 +83,9 @@
 }
 
 @media (min-width: 1200px) {
+  .post-container {
+    margin-right: 300px; /* 预留足够宽度，避免正文与目录重叠 */
+  }
   .side-catalog.fixed {
     position: fixed;
     top: 80px;
