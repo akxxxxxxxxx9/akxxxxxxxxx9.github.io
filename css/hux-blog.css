@@ -51,12 +51,16 @@
 .catalog-container {
   padding: 0px;
   max-width: 220px;
+  margin-right: 40px; /* 增加右侧留白 */
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  border-radius: 8px;
 }
 @media (min-width: 1200px) {
   .catalog-container {
     position: fixed;
-    right: 0;
-    top: 80px;
+    right: 40px; /* 让目录整体离页面右侧有留白 */
+    top: 100px;
     z-index: 1000;
     margin: 0;
   }
