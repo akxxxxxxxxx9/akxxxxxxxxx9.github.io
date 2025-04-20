@@ -1,7 +1,4 @@
 @media (min-width: 1200px) {
-  .post-container {
-    margin-right: 300px; /* 预留足够宽度，避免正文与目录重叠 */
-  }
   .post-container,
   .sidebar-container {
     padding-right: 5%;
@@ -53,23 +50,6 @@
 }
 .catalog-container {
   padding: 0px;
-  max-width: 220px;
-  margin-right: 40px; /* 增加右侧留白 */
-  background: #fff;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-  border-radius: 8px;
-}
-@media (min-width: 1200px) {
-  .post-container {
-    margin-right: 300px; /* 预留足够宽度，避免正文与目录重叠 */
-  }
-  .catalog-container {
-    position: fixed;
-    right: 40px; /* 让目录整体离页面右侧有留白 */
-    top: 100px;
-    z-index: 1000;
-    margin: 0;
-  }
 }
 .side-catalog {
   display: block;
@@ -77,19 +57,6 @@
   height: 100%;
   padding-bottom: 40px;
   width: 195px;
-  position: sticky;
-  top: 80px;
-  /* 兼容旧样式 */
-}
-
-@media (min-width: 1200px) {
-  .post-container {
-    margin-right: 300px; /* 预留足够宽度，避免正文与目录重叠 */
-  }
-  .side-catalog.fixed {
-    position: fixed;
-    top: 80px;
-  }
 }
 .side-catalog.fixed {
   position: fixed;
@@ -1604,7 +1571,7 @@ img::-moz-selection {
   font-weight: 200;
   /* Hux learn from
      *     TypeIsBeautiful,
-     *     [This Post](http://zhuanlan.zhihu.com/ibuick/20186806) etc.
+     *     [This Post](https://24Email.996399.xyz) etc.
      */
   font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", "Arial", "PingFang SC", "Hiragino Sans GB", "STHeiti", "Microsoft YaHei", "Microsoft JhengHei", "Source Han Sans SC", "Noto Sans CJK SC", "Source Han Sans CN", "Noto Sans SC", "Source Han Sans TC", "Noto Sans CJK TC", "WenQuanYi Micro Hei", SimSun, sans-serif;
   line-height: 1.7;

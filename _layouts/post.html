@@ -1,195 +1,172 @@
 ---
 layout: default
 ---
-<!-- 页面 front matter，指定使用 default 布局（通常定义在 _layouts/default.html 中） -->
 
-<!-- 微信分享图片 hack（已注释，暂时禁用） -->
+<!-- Image to hack wechat -->
 <!-- <img src="/img/icon_wechat.png" width="0" height="0"> -->
-<!-- 动态选择页面或站点的头部图片（已注释） -->
 <!-- <img src="{{ site.baseurl }}/{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}" width="0" height="0"> -->
 
-<!-- 文章头部 -->
+<!-- Post Header -->
 {% include intro-header.html type='post' %}
-<!-- 引入 intro-header.html 模板，类型为 post，用于渲染文章标题或特色图片区域 -->
 
-<!-- 文章内容区域 -->
+<!-- Post Content -->
 <article>
     <div class="container">
         <div class="row">
-            <!-- 文章容器，使用 Bootstrap 栅格布局 -->
-            <div class="
-                col-lg-8 col-lg-offset-1 col-md-8 col-md-offset-1 col-sm-12 col-xs-12 post-container">
 
-                
-                <!-- 多语言支持 -->
+    <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <!-- Multi-Lingual -->
                 {% if page.multilingual %}
                     {% include multilingual-sel.html %}
                 {% endif %}
-                <!-- 如果页面启用了多语言（page.multilingual 为真），引入多语言选择模板 -->
 
-                <!-- 渲染文章内容（由 Markdown 文件提供） -->
-                {{ content }}
+				{{ content }}
 
-                <!-- 隐藏的分隔线，用于视觉间距 -->
                 <hr style="visibility: hidden;">
-                <!-- 文章导航：上一页和下一页 -->
                 <ul class="pager">
                     {% if page.previous.url %}
-                    <!-- 如果存在上一篇文章 -->
                     <li class="previous">
-                        <!-- 链接到上一篇文章，显示标题并添加 tooltip -->
-                        <a href="{{ page.previous.url | prepend: site.baseurl | replace: '//', '/' }}" 
-                           data-toggle="tooltip" 
-                           data-placement="top" 
-                           title="{{page.previous.title}}">
-                            Previous<br>
-                            <span>{{page.previous.title}}</span>
+                        <a href="{{ page.previous.url | prepend: site.baseurl | replace: '//', '/' }}" data-toggle="tooltip" data-placement="top" title="{{page.previous.title}}">
+                        Previous<br>
+                        <span>{{page.previous.title}}</span>
                         </a>
                     </li>
                     {% endif %}
                     {% if page.next.url %}
-                    <!-- 如果存在下一篇文章 -->
                     <li class="next">
-                        <!-- 链接到下一篇文章，显示标题并添加 tooltip -->
-                        <a href="{{ page.next.url | prepend: site.baseurl | replace: '//', '/' }}" 
-                           data-toggle="tooltip" 
-                           data-placement="top" 
-                           title="{{page.next.title}}">
-                            Next<br>
-                            <span>{{page.next.title}}</span>
+                        <a href="{{ page.next.url | prepend: site.baseurl | replace: '//', '/' }}" data-toggle="tooltip" data-placement="top" title="{{page.next.title}}">
+                        Next<br>
+                        <span>{{page.next.title}}</span>
                         </a>
                     </li>
                     {% endif %}
                 </ul>
-                <!-- 隐藏的分隔线，用于视觉间距 -->
                 <hr style="visibility: hidden;">
 
                 {% if site.disqus_username %}
-                <!-- Disqus 评论框 -->
+                <!-- disqus 评论框 start -->
                 <div class="comment">
-                    <!-- Disqus 评论区域，动态加载评论内容 -->
                     <div id="disqus_thread" class="disqus-thread"></div>
                 </div>
-                <!-- Disqus 评论框结束 -->
+                <!-- disqus 评论框 end -->
                 {% endif %}
 
                 {% if site.netease_comment %}
-                <!-- 网易云跟帖评论框 -->
+                <!-- 网易云跟帖 评论框 start -->
                 <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
-                <!-- 网易云跟帖评论框结束 -->
+                <!-- 网易云跟帖 评论框 end -->
                 {% endif %}
             </div>  
-        </div>
-        <div class="row">
-            <!-- 侧边目录容器 -->
-            {% unless page.no-catalog %}
-            <!-- 如果页面未禁用目录（page.no-catalog 不为真） -->
+
+    <!-- Side Catalog Container -->
+        {% unless page.no-catalog %}
             <div class="
-                col-lg-3 col-lg-offset-1 col-md-3 col-md-offset-1 col-sm-12 col-xs-12 catalog-container">
+                col-lg-2 col-lg-offset-0
+                visible-lg-block
+                sidebar-container
+                catalog-container">
                 <div class="side-catalog">
-                    <!-- 隐藏的分隔线，仅在大型屏幕上显示 -->
                     <hr class="hidden-sm hidden-xs">
                     <h5>
-                        <!-- 目录切换按钮 -->
                         <a class="catalog-toggle" href="#">CATALOG</a>
                     </h5>
-                    <!-- 目录内容区域，动态填充（通常由 JavaScript 生成） -->
                     <ul class="catalog-body"></ul>
                 </div>
             </div>
-            {% endunless %}
+        {% endunless %}
 
-            <!-- 侧边栏容器 -->
+    <!-- Sidebar Container -->
             <div class="
-                col-lg-3 col-lg-offset-1 col-md-3 col-md-offset-1 col-sm-12 col-xs-12 sidebar-container">
-                <!-- 特色标签，显示在底部 -->
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
                 {% include featured-tags.html bottom=true %}
-                <!-- 友链 -->
+
+                <!-- Friends Blog -->
                 {% include friends.html %}
             </div>
         </div>
     </div>
 </article>
 
-<!-- MathJax 支持 -->
+<!-- add support for mathjax by voleking-->
 {% if page.mathjax %}
   {% include mathjax_support.html %}
 {% endif %}
-<!-- 如果页面启用了 MathJax（page.mathjax 为真），引入 mathjax_support.html 模板 -->
 
 {% if site.netease_comment %}
-<!-- 网易云跟帖 JavaScript 代码 -->
+<!-- 网易云跟帖JS代码 start -->
 <script src="https://img1.cache.netease.com/f2e/tie/yun/sdk/loader.js"></script>
 <script>
-  // 配置网易云跟帖
   var cloudTieConfig = {
-    url: document.location.href, // 当前页面 URL
-    sourceId: "", // 数据源 ID（未指定）
-    productKey: "de25fc98a6fe48b3bc8a7ae765da99a0", // 产品密钥
-    target: "cloud-tie-wrapper" // 评论容器 ID
+    url: document.location.href, 
+    sourceId: "",
+    productKey: "de25fc98a6fe48b3bc8a7ae765da99a0",
+    target: "cloud-tie-wrapper"
   };
-  var yunManualLoad = true; // 启用手动加载
-  // 加载网易云跟帖脚本
+  var yunManualLoad = true;
   Tie.loader("aHR0cHM6Ly9hcGkuZ2VudGllLjE2My5jb20vcGMvbGl2ZXNjcmlwdC5odG1s", true);
 </script>
-<!-- 网易云跟帖 JavaScript 代码结束 -->
+<!-- 网易云跟帖JS代码 end -->
 {% endif %}
 
-{% if site.disqus_username %}
-<!-- Disqus 公共 JavaScript 代码（一个页面只需加载一次） -->
-<script type="text/javascript">
-    /* Disqus 配置变量 */
-    var disqus_shortname = "{{site.disqus_username}}"; // Disqus 用户名
-    var disquis_identifier = "{{page.id}}"; // 页面唯一标识符（注意：此处代码有 typo，应为 disqus_identifier）
-    var disquis_url = "{{site.url}}{{page.url}}"; // 页面完整 URL（注意：此处代码有 typo，应为 disqus_url）
 
-    // 动态加载 Disqus 评论脚本
+{% if site.disqus_username %}
+<!-- disqus 公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "{{site.disqus_username}}";
+    var disqus_identifier = "{{page.id}}";
+    var disqus_url = "{{site.url}}{{page.url}}";
+
     (function() {
-        var dsq = document.createElement('script'); 
-        dsq.type = 'text/javascript'; 
-        dsq.async = true; // 异步加载
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
         dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-        // 将脚本插入到 <head> 或 <body> 中
         (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
     })();
 </script>
-<!-- Disqus 公共 JavaScript 代码结束 -->
+<!-- disqus 公共JS代码 end -->
 {% endif %}
 
+
 {% if site.anchorjs %}
-<!-- 异步加载脚本的通用函数 -->
+<!-- async load function -->
 <script>
     function async(u, c) {
       var d = document, t = 'script',
           o = d.createElement(t),
           s = d.getElementsByTagName(t)[0];
-      o.src = u; // 设置脚本 URL
-      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); } // 加载完成回调
-      s.parentNode.insertBefore(o, s); // 插入脚本
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
     }
 </script>
-<!-- AnchorJS 脚本，文档：http://bryanbraun.github.io/anchorjs/ -->
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
 <script>
-    async("//cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js", function(){
-        // 配置 AnchorJS 选项
+    async("//cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js",function(){
         anchors.options = {
-          visible: 'hover', // 锚点在鼠标悬停时可见
-          placement: 'right', // 锚点显示在右侧
-          // icon: '#' // 锚点图标（已注释，默认为空）
+          visible: 'hover',
+          placement: 'right',
+          // icon: '#'
         };
-        // 为页面中的标题添加锚点，排除特定元素
         anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
-    });
+    })
 </script>
-<!-- AnchorJS 样式调整 -->
 <style>
-    /* 在大屏幕上将锚点放置在左侧 */
+    /* place left on bigger screen */
     @media all and (min-width: 800px) {
-        .anchorjs-link {
+        .anchorjs-link{
             position: absolute;
             left: -0.75em;
             font-size: 1.1em;
-            margin-top: -0.1em;
+            margin-top : -0.1em;
         }
     }
 </style>
