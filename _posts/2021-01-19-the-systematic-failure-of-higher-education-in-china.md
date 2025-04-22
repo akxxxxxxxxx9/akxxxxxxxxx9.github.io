@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      "作业"
-subtitle:   "The Systematic Failure of Higher Education in China"
+subtitle:   "部署在cloudflare上的个人静态导航网页"
 date:       2025-03-19 12:00:00
 author:     "aki"
 catalog: false
